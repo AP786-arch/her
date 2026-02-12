@@ -1,0 +1,176 @@
+\<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Khushi ❤️</title>
+
+<style>
+body{
+    margin:0;
+    padding:0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg,#ff758c,#ff7eb3);
+    text-align:center;
+    color:white;
+    overflow:hidden; /* prevents shaking */
+}
+
+/* Fixed Content Center */
+.center{
+    position:fixed;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    width:90%;
+    max-width:500px;
+}
+
+/* Entry */
+#entry{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+
+input{
+    padding:12px;
+    border-radius:25px;
+    border:none;
+    margin-top:15px;
+    text-align:center;
+    font-size:16px;
+    width:70%;
+}
+
+button{
+    padding:10px 25px;
+    border:none;
+    border-radius:25px;
+    margin-top:15px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+#main{
+    display:none;
+}
+
+h1{
+    font-size:40px;
+    animation:glow 1.5s infinite alternate;
+}
+
+@keyframes glow{
+    from{ text-shadow:0 0 10px white; }
+    to{ text-shadow:0 0 25px white; }
+}
+
+#type{
+    font-size:20px;
+    margin-top:20px;
+    min-height:60px;
+}
+
+textarea{
+    width:90%;
+    height:80px;
+    margin-top:20px;
+    border-radius:15px;
+    border:none;
+    padding:10px;
+}
+
+/* Hearts background */
+.heart{
+    position:fixed;
+    top:-20px;
+    color:red;
+    animation:fall 6s linear infinite;
+    z-index:-1;
+}
+
+@keyframes fall{
+    to{ transform:translateY(110vh); }
+}
+</style>
+</head>
+
+<body>
+
+<div class="center">
+
+<div id="entry">
+    <h2>Whom your BF loves the most? ❤️</h2>
+    <input type="text" id="answer" placeholder="Type your answer">
+    <button onclick="checkAnswer()">Enter</button>
+</div>
+
+<div id="main">
+    <h1>Khushi ❤️</h1>
+    <div id="type"></div>
+
+    <textarea id="commentBox" placeholder="Write something💌"></textarea>
+    <br>
+    <button onclick="saveComment()">Send ❤️</button>
+
+    <div id="savedMessage"></div>
+</div>
+
+</div>
+
+<script>
+const correctAnswer="khushi";
+
+function checkAnswer(){
+    let userAnswer=document.getElementById("answer").value.toLowerCase().trim();
+    if(userAnswer===correctAnswer){
+        document.getElementById("entry").style.display="none";
+        document.getElementById("main").style.display="block";
+        startTyping();
+        loadComment();
+    }else{
+        alert("Wrong answer 😜");
+    }
+}
+
+const message="You are the one💖, I can't stop thinking about you, sorry if i ever being rude to you, I love you forever Khushi ❤️";
+let i=0;
+
+function startTyping(){
+    if(i<message.length){
+        document.getElementById("type").innerHTML+=message.charAt(i);
+        i++;
+        setTimeout(startTyping,40);
+    }
+}
+
+function saveComment(){
+    let text=document.getElementById("commentBox").value;
+    localStorage.setItem("khushiMessage", text);
+    document.getElementById("savedMessage").innerHTML="💌 She wrote: " + text;
+}
+
+function loadComment(){
+    let saved=localStorage.getItem("khushiMessage");
+    if(saved){
+        document.getElementById("savedMessage").innerHTML="💌 She wrote: " + saved;
+    }
+}
+
+/* Smooth Hearts */
+function createHeart(){
+    const heart=document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML="❤️";
+    heart.style.left=Math.random()*100+"vw";
+    heart.style.fontSize=Math.random()*15+15+"px";
+    document.body.appendChild(heart);
+    setTimeout(()=>heart.remove(),6000);
+}
+setInterval(createHeart,500);
+</script>
+
+</body>
+</html>
+
